@@ -2,13 +2,7 @@
 
 {% block content %}
 
-<h1>Tasks</h1> 
-
-<h3>
-    <a href="{% url 'create_task' %}">
-        Create New Task
-    </a>
-</h3>
+<h1>Pending Tasks</h1> 
 
 {% for task in tasks %}
     <div>
@@ -20,7 +14,8 @@
             {% endif %}
         </a>
         <p>{{ task.description }}</p>
-        <p>Important: {{ task.important }}</p>
+        <p>{{ task.datecompleted|date:'M j Y:i' }}</p>
+        
     </div>
 {% empty %}
     <p>No tasks available.</p>

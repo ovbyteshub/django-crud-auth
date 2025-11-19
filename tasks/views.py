@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm
 from .models import Task
+from django.utils import timezone
 # Create your views here.
 
 
@@ -118,5 +119,34 @@ def tasks_details(request, task_id):
                     'form': form,
                     'error': 'Error updating task. Please try again.'
                 })
+    else:
+        return redirect('home')
+
+def complete_task(request, task_id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            task.datecompleted = timezone.now()
+            task.save()
+            return redirect('tasks')
+    else:
+        return redirect('home')
+    
+def delete_task(request, task_id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            task.delete()
+            return redirect('tasks')
+    else:
+        return redirect('home')
+    
+def completed_tasks(request):
+    if request.user.is_authenticated:
+        tasks = Task.objects.filter(
+            user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+        return render(request, 'tasks/tasks.html', {
+            'tasks': tasks
+        })
     else:
         return redirect('home')

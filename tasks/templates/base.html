@@ -14,8 +14,10 @@
             </li>
             {% if user.is_authenticated %} 
             <li>
-                <a href="{% url 'tasks' %}">Tasks</a>
+                <a href="{% url 'tasks' %}">Pending Tasks</a>
             </li>
+            <li>
+                <a href="{% url 'completed_tasks' %}">Completed Tasks</a>
             <li>
                 <a href="{% url 'logout' %}">Log Out</a>
             </li>
