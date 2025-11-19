@@ -12,11 +12,13 @@
 
 {% for task in tasks %}
     <div>
-        {% if task.important %}
-            <strong>{{task.title}}</strong>
-        {% else %}
-            {{task.title}}
-        {% endif %}
+        <a href="{% url 'tasks_details' task.id %}">
+            {% if task.important %}
+                <strong>{{task.title}}</strong>
+            {% else %}
+                {{task.title}}
+            {% endif %}
+        </a>
         <p>{{ task.description }}</p>
         <p>Important: {{ task.important }}</p>
     </div>

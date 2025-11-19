@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -39,13 +39,13 @@ def signup(request):
 
 def tasks(request):
     if request.method == 'GET' and request.user.is_authenticated:
-        tasks = Task.objects.filter(user=request.user, datecompleted__isnull=True)
+        tasks = Task.objects.filter(
+            user=request.user, datecompleted__isnull=True)
         return render(request, 'tasks/tasks.html', {
             'tasks': tasks
         })
     else:
         return redirect('home')
-        
 
 
 def signout(request):
@@ -78,7 +78,7 @@ def create_task(request):
             'form': TaskForm()
         })
     else:
-        #print(request.POST)
+        # print(request.POST)
         if request.method == 'POST':
             try:
                 form = TaskForm(request.POST)
@@ -91,3 +91,14 @@ def create_task(request):
                     'form': TaskForm(),
                     'error': 'Bad data passed in. Please try again.'
                 })
+
+
+def tasks_details(request, task_id):
+    if request.method == 'GET' and request.user.is_authenticated:
+        task = get_object_or_404(Task, pk=task_id, user=request.user) 
+        #task = Task.objects.get(pk=task_id, user=request.user)
+        return render(request, 'tasks/tasks_details.html', {
+            'task': task
+        })
+    else:
+        return redirect('home')
