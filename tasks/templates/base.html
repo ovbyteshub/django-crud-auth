@@ -12,16 +12,16 @@
             <li>
                 <a href="/">Home</a>
             </li>
-            <li>
-                <a href="/tasks/">Tasks</a>
-            </li>
             {% if user.is_authenticated %} 
             <li>
-                <a href="/logout/">Log Out</a>
+                <a href="{% url 'tasks' %}">Tasks</a>
+            </li>
+            <li>
+                <a href="{% url 'logout' %}">Log Out</a>
             </li>
             {% else %}
             <li>
-                <a href="/signup/">Sign Up</a>
+                <a href="{% url 'signup' %}">Sign Up</a>
             </li>
             {% endif %}
         </ul>
