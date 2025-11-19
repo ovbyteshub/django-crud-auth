@@ -73,32 +73,50 @@ def signin(request):
 
 
 def create_task(request):
-    if request.method == 'GET':
-        return render(request, 'tasks/create_task.html', {
-            'form': TaskForm()
-        })
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            return render(request, 'tasks/create_task.html', {
+                'form': TaskForm()
+            })
+        else:
+            # print(request.POST)
+            if request.method == 'POST':
+                try:
+                    form = TaskForm(request.POST)
+                    new_task = form.save(commit=False)
+                    new_task.user = request.user
+                    new_task.save()
+                    return redirect('tasks')
+                except ValueError:
+                    return render(request, 'tasks/create_task.html', {
+                        'form': TaskForm(),
+                        'error': 'Bad data passed in. Please try again.'
+                    })
     else:
-        # print(request.POST)
-        if request.method == 'POST':
-            try:
-                form = TaskForm(request.POST)
-                new_task = form.save(commit=False)
-                new_task.user = request.user
-                new_task.save()
-                return redirect('tasks')
-            except ValueError:
-                return render(request, 'tasks/create_task.html', {
-                    'form': TaskForm(),
-                    'error': 'Bad data passed in. Please try again.'
-                })
+        return redirect('home')
 
 
 def tasks_details(request, task_id):
-    if request.method == 'GET' and request.user.is_authenticated:
-        task = get_object_or_404(Task, pk=task_id, user=request.user) 
-        #task = Task.objects.get(pk=task_id, user=request.user)
-        return render(request, 'tasks/tasks_details.html', {
-            'task': task
-        })
+    if request.user.is_authenticated:
+        if request.method == 'GET':
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            # task = Task.objects.get(pk=task_id, user=request.user)
+            form = TaskForm(instance=task)
+            return render(request, 'tasks/tasks_details.html', {
+                'task': task,
+                'form': form
+            })
+        else:
+            try:
+                task = get_object_or_404(Task, pk=task_id, user=request.user)
+                form = TaskForm(request.POST, instance=task)
+                form.save()
+                return redirect('tasks')
+            except ValueError:
+                return render(request, 'tasks/tasks_details.html', {
+                    'task': task,
+                    'form': form,
+                    'error': 'Error updating task. Please try again.'
+                })
     else:
         return redirect('home')

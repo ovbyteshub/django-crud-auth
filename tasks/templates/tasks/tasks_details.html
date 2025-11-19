@@ -4,9 +4,17 @@
 
 <div>
   <h2>Task Details</h2>
-
   <h3>{{ task.title}}</h3>
-  <p>{{ task.description }}</p>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+     {{ error }}
+    {{ form.as_p }}
+    <button type="submit">
+      Save Changes
+    </button>
+  </form>
+
 </div>
 
 {% endblock %}
