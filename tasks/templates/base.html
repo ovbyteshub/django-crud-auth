@@ -23,6 +23,9 @@
             <li>
                 <a href="{% url 'signup' %}">Sign Up</a>
             </li>
+            <li>
+                <a href="{% url 'signin' %}">Sign In</a>
+            </li>
             {% endif %}
         </ul>
     </nav>
@@ -30,7 +33,7 @@
     {% block content %}
 
     {% endblock %}
-
+    <br>
     Todos los derechos reservados OV &copy; 2025
 </body>
 </html>
