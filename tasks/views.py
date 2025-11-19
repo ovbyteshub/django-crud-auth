@@ -6,6 +6,8 @@ from django.db import IntegrityError
 from .forms import TaskForm
 from .models import Task
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 
@@ -37,7 +39,7 @@ def signup(request):
                     'form': UserCreationForm(),
                     'error': 'Passwords do not match. Please try again.'})
 
-
+@login_required
 def tasks(request):
     if request.method == 'GET' and request.user.is_authenticated:
         tasks = Task.objects.filter(
@@ -48,7 +50,7 @@ def tasks(request):
     else:
         return redirect('home')
 
-
+@login_required
 def signout(request):
     logout(request)
     return redirect('home')
@@ -72,7 +74,7 @@ def signin(request):
             login(request, authenticated_user)
             return redirect('tasks')
 
-
+@login_required
 def create_task(request):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -96,7 +98,7 @@ def create_task(request):
     else:
         return redirect('home')
 
-
+@login_required
 def tasks_details(request, task_id):
     if request.user.is_authenticated:
         if request.method == 'GET':
@@ -122,6 +124,7 @@ def tasks_details(request, task_id):
     else:
         return redirect('home')
 
+@login_required
 def complete_task(request, task_id):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -131,7 +134,8 @@ def complete_task(request, task_id):
             return redirect('tasks')
     else:
         return redirect('home')
-    
+
+@login_required    
 def delete_task(request, task_id):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -140,7 +144,8 @@ def delete_task(request, task_id):
             return redirect('tasks')
     else:
         return redirect('home')
-    
+
+@login_required
 def completed_tasks(request):
     if request.user.is_authenticated:
         tasks = Task.objects.filter(
