@@ -10,6 +10,18 @@
     </a>
 </h3>
 
-
+{% for task in tasks %}
+    <div>
+        {% if task.important %}
+            <strong>{{task.title}}</strong>
+        {% else %}
+            {{task.title}}
+        {% endif %}
+        <p>{{ task.description }}</p>
+        <p>Important: {{ task.important }}</p>
+    </div>
+{% empty %}
+    <p>No tasks available.</p>
+{% endfor %}
 
 {% endblock %}
