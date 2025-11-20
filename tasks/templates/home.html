@@ -1,8 +1,47 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block content %}
 
-<h1>Home</h1>
+<main class="container py-5">
+  <section class="card card-body">
+    <h1 class="display-1 text-center">OV Taskeler</h1>
+    <h3 class="display-5 text-center">Create your tasks and your dreams come true!</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores doloribus
+      ea ullam eligendi porro recusandae, amet hic dicta enim dolorum asperiores
+      ab, veniam soluta quasi quisquam pariatur? Obcaecati, ad quo impedit
+      voluptate nisi sit vitae necessitatibus voluptas magnam ab ipsum nulla
+      repellat temporibus, placeat sint sequi ea! Aliquam amet explicabo
+      asperiores quia officia atque, expedita tempora quas ab ea molestias fuga
+      quisquam? Commodi quae, nemo maiores mollitia corrupti labore deserunt
+      assumenda ducimus tempora natus minus sint placeat quo magni perferendis
+      repellendus numquam repudiandae esse? Ipsum ad voluptates vel alias quas
+      natus omnis cumque, adipisci a quos praesentium repellat, delectus quasi.
+      Nesciunt quasi provident facilis molestias, exercitationem rem, nam, aut
+      saepe nostrum accusamus esse. Consequatur, eveniet delectus nostrum
+      quibusdam aspernatur, provident obcaecati libero aperiam, laborum tempora
+      suscipit quisquam? Reiciendis dicta nisi soluta. Suscipit voluptate
+      temporibus iure tempore vitae ipsa quae sunt totam quasi harum iste
+      molestiae officiis maiores, neque error. Corporis, reiciendis
+      voluptatibus. Delectus eligendi aperiam facilis doloremque architecto.
+      Quibusdam nam officiis nemo ipsam quas blanditiis nesciunt illo error
+      labore inventore! Neque totam iusto perspiciatis illo aperiam! Suscipit ad
+      consectetur laboriosam nemo, quas fugiat nihil. Architecto commodi aperiam
+      doloremque, facilis, laborum vel molestias eos culpa delectus nobis minima
+      autem voluptates cupiditate.
+    </p>
 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores doloribus ea ullam eligendi porro recusandae, amet hic dicta enim dolorum asperiores ab, veniam soluta quasi quisquam pariatur? Obcaecati, ad quo impedit voluptate nisi sit vitae necessitatibus voluptas magnam ab ipsum nulla repellat temporibus, placeat sint sequi ea! Aliquam amet explicabo asperiores quia officia atque, expedita tempora quas ab ea molestias fuga quisquam? Commodi quae, nemo maiores mollitia corrupti labore deserunt assumenda ducimus tempora natus minus sint placeat quo magni perferendis repellendus numquam repudiandae esse? Ipsum ad voluptates vel alias quas natus omnis cumque, adipisci a quos praesentium repellat, delectus quasi. Nesciunt quasi provident facilis molestias, exercitationem rem, nam, aut saepe nostrum accusamus esse. Consequatur, eveniet delectus nostrum quibusdam aspernatur, provident obcaecati libero aperiam, laborum tempora suscipit quisquam? Reiciendis dicta nisi soluta. Suscipit voluptate temporibus iure tempore vitae ipsa quae sunt totam quasi harum iste molestiae officiis maiores, neque error. Corporis, reiciendis voluptatibus. Delectus eligendi aperiam facilis doloremque architecto. Quibusdam nam officiis nemo ipsam quas blanditiis nesciunt illo error labore inventore! Neque totam iusto perspiciatis illo aperiam! Suscipit ad consectetur laboriosam nemo, quas fugiat nihil. Architecto commodi aperiam doloremque, facilis, laborum vel molestias eos culpa delectus nobis minima autem voluptates cupiditate.</p>
+    <div class="d-flex justify-content-center gap-1">
+        <a class="btn btn-dark" href="{% url 'signin' %}">
+            Sign In
+        </a>
+        
+        <a class="btn btn-dark" href="{% url 'signup' %}">
+            Sign Up
+        </a>
+    </div>
+
+  </section>
+</main>
+
 {% endblock %}
